@@ -64,8 +64,11 @@ def main():
     g = Graph()
     second_line = input().split(' ')
     graph_connections_list = list(divide_chunks(second_line, 3))
+    
+    graph_connections_list = [sublist for sublist in graph_connections_list if any(sublist)]
 
     for connection in graph_connections_list:
+        
         u = connection[0]
         v = connection[1]
         w = connection[2]
@@ -78,6 +81,7 @@ def main():
 
     third_line = input().split(' ')
     duct_connections_list = list(divide_chunks(third_line, 2))
+    duct_connections_list = [sublist for sublist in duct_connections_list if any(sublist)]
 
     for connection in duct_connections_list:
         u = connection[0]
@@ -92,5 +96,6 @@ def main():
         determineVictory(g, imposter_graph, int(room), lista_resultados)
     
     print("\n".join([x for x in lista_resultados]))
+    
 if __name__ == "__main__":
     main()
