@@ -20,6 +20,39 @@ For businesses, data mining is seen as a way to extract valuable insights from l
 
 
 
+What is regression?, correlation? Which one is closer to supervised classification?, to frequent itemset mining? Can you give reasons why "correlation does not imply causation"?
+
+Regression and correlation are both statistical techniques used to analyze the relationship between two variables.
+
+Regression is a method of modeling the relationship between a dependent variable and one or more independent variables. It is a supervised learning technique that aims to find the best fitting line or curve that describes the relationship between the variables, in order to make predictions or estimate the value of the dependent variable based on the independent variables.
+
+Correlation, on the other hand, measures the strength and direction of the linear relationship between two variables. It is a measure of association that ranges from -1 (perfect negative correlation) to 1 (perfect positive correlation), with 0 indicating no correlation. Correlation is a descriptive technique that can be used to identify patterns or trends in the data, but it does not involve making predictions or estimating values.
+
+Regression is closer to supervised classification because both involve modeling the relationship between variables and making predictions. In supervised classification, the goal is to predict the class label of an instance based on its attributes, while in regression the goal is to predict the value of a dependent variable based on the values of independent variables.
+
+Correlation is closer to frequent itemset mining because both involve identifying patterns or associations in the data. Frequent itemset mining is a technique used in data mining to identify sets of items that frequently occur together in a dataset, while correlation is a measure of the strength and direction of the relationship between two variables.
+
+"Correlation does not imply causation" is a commonly used phrase in statistics and data analysis. It means that just because two variables are correlated, it does not necessarily mean that one causes the other. There may be other factors or variables that influence both variables, or the relationship may be coincidental or spurious. For example, ice cream sales and crime rates may be positively correlated, but it would be incorrect to conclude that eating ice cream causes crime. In this case, the relationship is likely to be spurious, as both variables are influenced by temperature.
+
+What are the assumptions behind the use of the Pearson correlation? Is that measure robust? Can you name a correlation measure that applies to ordinal attributes?
+
+The Pearson correlation coefficient is a measure of the linear relationship between two interval-scaled variables. There are several assumptions behind its use:
+
+Normality: The variables should follow a normal distribution.
+
+Linearity: The relationship between the variables should be linear.
+
+Homoscedasticity: The variance of the dependent variable should be constant across different values of the independent variable.
+
+Independence: The observations should be independent of each other.
+
+Outliers: There should be no outliers in the data.
+
+The Pearson correlation coefficient is not robust, as it is sensitive to outliers and non-normality. It is affected by extreme values and can be biased if the data do not follow a normal distribution.
+
+A correlation measure that applies to ordinal attributes is the Spearman rank correlation coefficient. It is a nonparametric measure of the strength and direction of the monotonic relationship between two variables. It does not assume a linear relationship between the variables, and it is robust to outliers and non-normality. It is calculated by ranking the values of each variable and calculating the Pearson correlation coefficient between the ranks.
+
+What is Simpson's paradox? Can you give an example? Bonus point to those who give a real-world example not in the slides (easy to find on the Web).
 
 
 
@@ -164,8 +197,15 @@ Pearson's correlation coefficient is a non-robust statistic for correlation beca
 
 What is an outlier? What visualization helps in discovering outliers w.r.t. one attribute?, two attributes? Do you know a way to detect outliers in a higher-dimensional space?
 
+An outlier is an observation that is significantly different from other observations in a dataset. Outliers can be caused by measurement errors, data entry errors, or genuine extreme values.
+
+A boxplot is a visualization technique that helps in discovering outliers with respect to one attribute. In a boxplot, the data is represented by a box that shows the interquartile range (IQR) of the data, the median, and the whiskers that extend to the minimum and maximum values that are within 1.5 times the IQR. Observations that lie outside the whiskers are considered outliers.
+
+A scatter plot is a visualization technique that helps in discovering outliers with respect to two attributes. In a scatter plot, each observation is represented by a point that shows the values of the two attributes. Outliers can be identified as points that are far away from the other points in the plot.
+
+In a higher-dimensional space, one way to detect outliers is to use clustering techniques. Outliers are the data points that are not assigned to any cluster or that belong to a small or sparse cluster. Another approach is to use dimensionality reduction techniques, such as principal component analysis (PCA), to project the data onto a lower-dimensional space and visualize the outliers in a scatter plot or a parallel coordinates plot. Another approach is to use anomaly detection techniques that are designed to identify outliers based on their deviation from the normal behavior of the data.
+
+
 Mahalanobis Distance: This method uses the Mahalanobis distance, which is a measure of the distance between a point and the center of a distribution, taking into account the covariance matrix of the data. Outliers are defined as points that are far away from the center of the distribution, and their distance is compared to a threshold value based on a probability distribution.
-
-
 
 
