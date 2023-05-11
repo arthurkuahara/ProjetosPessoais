@@ -1,0 +1,362 @@
+POSIX Commands:
+
+less: Used to view files one screen at a time. Example: less file.txt
+head: Displays the first 10 lines of a file. Example: head file.txt
+tail: Displays the last 10 lines of a file. Example: tail file.txt
+shuf: Randomly shuffles the lines of a file. Example: shuf file.txt
+cat: Concatenates and displays the contents of files. Example: cat file1.txt file2.txt
+tr: Translates or deletes characters from input. Example: echo "hello" | tr 'el' 'xy'
+wc: Counts the number of lines, words, and bytes in a file. Example: wc file.txt
+cut: Selects and displays specific columns or fields from input. Example: cut -d "," -f 1,3 file.txt
+paste: Merges lines from multiple files. Example: paste file1.txt file2.txt
+comm: Compares two sorted files line by line. Example: comm file1.txt file2.txt
+join: Merges lines from two files based on a common field. Example: join file1.txt file2.txt
+sort: Sorts lines of text alphabetically or numerically. Example: sort file.txt
+uniq: Filters out adjacent, duplicate lines of input. Example: uniq file.txt
+grep: Searches for a pattern in a file or input. Example: grep "pattern" file.txt
+Sed and Awk:
+
+sed: A stream editor that performs text transformations on an input stream. Example: sed 's/old/new/g' file.txt
+awk: A powerful text processing tool that works as a programming language. Example: awk '{print $1,$3}' file.txt
+
+Print the first 5 lines of a file called "data.txt": head -n 5 data.txt
+Count the number of words in a file called "lyrics.txt": wc -w lyrics.txt
+Sort a file called "names.txt" in reverse alphabetical order: sort -r names.txt
+Find all lines in a file called "books.txt" that contain the word "fantasy": grep "fantasy" books.txt
+Replace all occurrences of "hello" with "hi" in a file called "greetings.txt": sed 's/hello/hi/g' greetings.txt
+
+less: -N shows line numbers, -F quits if one screen, -i ignores case
+head: -n specifies the number of lines to display (default is 10)
+tail: -n specifies the number of lines to display (default is 10)
+shuf: -n specifies the number of lines to output
+cat: -n shows line numbers, -b shows line numbers but skips blank lines
+tr: -d deletes specified characters, -s squeezes consecutive identical characters
+wc: -l counts only lines, -w counts only words, -c counts only bytes
+cut: -d specifies a delimiter, -f selects specific fields
+paste: -d specifies a delimiter
+comm: -1 suppresses lines unique to file 1, -2 suppresses lines unique to file 2
+join: -t specifies a delimiter, -1 specifies the join field for file 1, -2 specifies the join field for file 2
+sort: -r sorts in reverse order, -n sorts numerically, -u removes duplicate lines
+uniq: -c shows the count of each unique line, -d shows only duplicate lines
+grep: -i ignores case, -v shows only lines that don't match
+
+sed: -n suppresses automatic printing, -e specifies a command to run, -f specifies a script file
+awk: -F specifies a field delimiter, $1 selects the first field, $2 selects the second field, etc.
+
+
+Search for a regular expression in a file: grep "pattern" file.txt
+For example, to search for all lines in file.txt that contain the word "error", you would use: grep "error" file.txt
+
+
+
+Extracting the top 5 words used in a text file and displaying the word count: cat file.txt | tr '[:upper:]' '[:lower:]' | tr -s '[:space:]' '\n' | sort | uniq -c | sort -nr | head -n 5
+Finding the lines in a file that contain a specific string and sorting them alphabetically: grep "string" file.txt | sort
+Replacing a specific string in a file and backing up the original file: sed -i.bak 's/oldstring/newstring/g' file.txt
+Calculating the average length of words in a text file: cat file.txt | tr -cs '[:alnum:]' '\n' | awk '{total += length} END {print total/NR}'
+Counting the number of unique words used in a text file: cat file.txt | tr -cs '[:alnum:]' '\n' | sort | uniq | wc -l
+Finding the top 3 most common last names in a list of names: cut -d ',' -f 2 names.txt | sort | uniq -c | sort -rn | head -n 3
+
+Extracting lines that match a specific pattern and adding line numbers to the output: sed -n '/pattern/=' file.txt | awk '{printf "%-5d%s\n", $1, $0}' file.txt
+Reversing the order of words in a text file: awk '{for(i=NF;i>=1;i--) printf("%s ",$i);print""}' file.txt 
+Removing lines that contain a specific string from a file: sed -i '/string/d' file.txt
+Adding a prefix to all lines in a file: awk '{print "prefix" $0}' file.txt > output.txt
+Extracting specific columns from a CSV file and sorting the output: awk -F ',' '{print $3 ", " $1}' file.csv | sort
+
+Character classes:
+[abc] - matches any of the characters a, b, or c
+[^abc] - matches any character except a, b, or c
+[a-z] - matches any lowercase letter between a and z
+[A-Z] - matches any uppercase letter between A and Z
+[0-9] - matches any digit between 0 and 9
+\w - matches any word character (i.e. alphanumeric or underscore)
+\W - matches any non-word character
+\d - matches any digit
+\D - matches any non-digit
+. - matches any character except newline
+Example exercises:
+
+Match all words that start with "c": \bc\w*\b
+Match all words that contain the letter "q": \b\w*q\w*\b
+Match all words that end with "ing": \b\w*ing\b
+Quantifiers:
+matches zero or more of the preceding character or group
+matches one or more of the preceding character or group
+? - matches zero or one of the preceding character or group
+{n} - matches exactly n occurrences of the preceding character or group
+{n,} - matches at least n occurrences of the preceding character or group
+{n,m} - matches between n and m occurrences of the preceding character or group
+Example exercises:
+
+Match all words that start with "c" and have at least three characters: \bc\w{2,}\b
+Match all words that contain the letter "q" and have at least four characters: \b\w*q\w{3,}\b
+Match all phone numbers that are formatted as (XXX) XXX-XXXX: \(\d{3}\) \d{3}-\d{4}
+Anchors:
+^ - matches the beginning of a line
+$ - matches the end of a line
+\b - matches a word boundary
+\B - matches a non-word boundary
+Example exercises:
+
+Match all lines that start with the word "Error": ^Error.*
+Match all lines that end with a digit: \d$
+Match all words that contain the letter "a" but do not start with "a": \B\w*a\w*\b
+Grouping and backreferences:
+( ) - groups characters or expressions together
+\1, \2, \3, etc. - backreferences to the contents of the first, second, third, etc. group
+Example exercises:
+
+Match all words that repeat a letter: \b(\w)\1+\b
+Match all phone numbers that have the same area code and exchange: (\(\d{3}\)) \d{3}-\d{4}\s+\1
+
+[:upper:]
+Upper case letters
+[:lower:]
+Lower case letters
+[:alpha:]
+All letters
+[:alnum:]
+Digits and letters
+[:digit:]
+Digits
+[:xdigit:]
+Hexade­cimal digits
+[:punct:]
+Punctu­ation
+[:blank:]
+Space and tab
+[:space:]
+Blank characters
+[:cntrl:]
+Control characters
+[:graph:]
+Printed characters
+[:print:]
+Printed characters and spaces
+[:word:]
+Digits, letters and underscore
+
+.
+Any character except new line (\n)
+(a|b)
+a or b
+(...)
+Group
+(?:...)
+Passive (non-c­apt­uring) group
+[abc]
+Range (a or b or c)
+[^abc]
+Not (a or b or c)
+[a-q]
+Lower case letter from a to q
+[A-Q]
+Upper case letter from A to Q
+[0-7]
+Digit from 0 to 7
+
+1) Display lines containing an from the sample.txt input file.
+
+$ grep 'an' sample.txt
+banana
+mango
+2) Display lines containing do as a whole word from the sample.txt input file.
+
+$ grep -w 'do' sample.txt
+Just do-it
+3) Display lines from sample.txt that satisfy both of these conditions:
+
+he matched irrespective of case
+either World or Hi matched case sensitively
+$ grep -i 'he' sample.txt | grep -e 'World' -e 'Hi'
+Hello World
+Hi there
+4) Display lines from code.txt containing fruit[0] literally.
+
+$ grep -F 'fruit[0]' code.txt
+fruit[0] = 'apple'
+5) Display only the first two matching lines containing t from the sample.txt input file.
+
+$ grep -m2 't' sample.txt
+Hi there
+Just do-it
+6) Display only the first three matching lines that do not contain he from the sample.txt input file.
+
+$ grep -m3 -v 'he' sample.txt
+Hello World
+
+How are you
+7) Display lines from sample.txt that contain do along with line number prefix.
+
+$ grep -n 'do' sample.txt
+6:Just do-it
+13:Much ado about nothing
+8) For the input file sample.txt, count the number of times the string he is present, irrespective of case.
+
+$ grep -io 'he' sample.txt | wc -l
+5
+9) For the input file sample.txt, count the number of empty lines.
+
+$ grep -cx '' sample.txt
+4
+10) For the input files sample.txt and code.txt, display matching lines based on the search terms (one per line) present in the terms.txt file. Results should be prefixed with the corresponding input filename.
+
+$ cat terms.txt
+are
+not
+go
+fruit[0]
+
+$ grep -Ff terms.txt sample.txt code.txt
+sample.txt:How are you
+sample.txt:mango
+sample.txt:Much ado about nothing
+sample.txt:Adios amigo
+code.txt:fruit[0] = 'apple'
+11) For the input file sample.txt, display lines containing amigo prefixed by the input filename as well as the line number.
+
+
+$ grep -Hn 'amigo' sample.txt
+sample.txt:15:Adios amigo
+
+
+12) For the input files sample.txt and code.txt, display only the filename if it contains apple.
+
+$ grep -l 'apple' sample.txt code.txt
+code.txt
+13) For the input files sample.txt and code.txt, display only whole matching lines based on the search terms (one per line) present in the lines.txt file. Results should be prefixed with the corresponding input filename as well as the line number.
+
+$ cat lines.txt
+banana
+fruit = []
+
+$ grep -Fnxf lines.txt sample.txt code.txt
+sample.txt:9:banana
+code.txt:1:fruit = []
+14) For the input files sample.txt and code.txt, count the number of lines that do not match any of the search terms (one per line) present in the terms.txt file.
+
+$ grep -vcFf terms.txt sample.txt code.txt
+sample.txt:11
+code.txt:3
+15) Count the total number of lines containing banana in the input files sample.txt and code.txt.
+
+
+$ cat sample.txt code.txt | grep -c 'banana'
+2
+
+1) For the input file patterns.txt, extract from ( to the next occurrence of ) unless they contain parentheses characters in between.
+
+$ grep -o '([^()]*)' patterns.txt
+(division)
+(#modulo)
+(9-2)
+()
+(j/k-3)
+(greeting)
+(b)
+2) For the input file patterns.txt, match all lines that start with den or end with ly.
+
+$ grep -E '^den|ly$' patterns.txt
+2 lonely
+dent
+lovely
+3) For the input file patterns.txt, extract all whole words containing 42 surrounded by word characters on both sides.
+
+$ grep -oE '\w+42\w+' patterns.txt
+Hi42Bye
+nice1423
+cool_42a
+_42_
+4) For the input file patterns.txt, match all lines containing car but not as a whole word.
+
+$ grep -E '\Bcar|car\B' patterns.txt
+scar
+care
+a huge discarded pile of books
+scare
+part cart mart
+5) Count the total number of times the whole words removed or rested or received or replied or refused or retired are present in the patterns.txt file.
+
+$ grep -owE 're(ceiv|mov|pli|fus|tir|st)ed' patterns.txt | wc -l
+9
+6) For the input file patterns.txt, match lines starting with s and containing e and t in any order.
+
+# can also use: grep '^s.*t' patterns.txt | grep 'e'
+$ grep -E '^s.*(e.*t|t.*e)' patterns.txt
+sets tests
+site cite kite bite
+subtle sequoia
+7) From the input file patterns.txt, extract all whole lines having the same first and last word character.
+
+# can also use: grep -xE '\w|(\w).*\1' patterns.txt
+$ grep -xE '(\w)(.*\1)?' patterns.txt
+sets tests
+Not a pip DOWN
+y
+1 dentist 1
+_42_
+8) For the input file patterns.txt, match all lines containing *[5] literally.
+
+
+$ grep -F '*[5]' patterns.txt
+(9-2)*[5]
+
+12) For the input file patterns.txt, display all lines starting with hand and ending immediately with s or y or le or no further characters.
+
+
+$ grep -xE 'hand([sy]|le)?' patterns.txt
+handle
+handy
+hands
+hand
+
+1) For the input file sample.txt, filter lines containing do and also display the line that comes after such a matching line.
+
+
+$ grep -A1 'do' sample.txt
+Just do-it
+Believe it
+--
+Much ado about nothing
+He he he
+
+$ grep --group-separator=$'\n' -A0 '.' sample.txt
+Hello World
+
+
+Hi there
+How are you
+
+
+Just do-it
+Believe it
+
+
+banana
+papaya
+mango
+
+
+Much ado about nothing
+He he he
+Adios amigo
+
+
+-E, --extended-regexp    Interpret pattern as an extended regular expression
+-F, --fixed-strings      Interpret pattern as a fixed string, not a regular expression
+-G, --basic-regexp       Interpret pattern as a basic regular expression
+-e, --regexp=PATTERN     Use PATTERN as the pattern to search for
+-f, --file=FILE          Obtain patterns from FILE, one per line
+-i, --ignore-case        Ignore case distinctions in both the pattern and the input files
+-v, --invert-match       Invert the sense of matching, to select non-matching lines
+-w, --word-regexp        Match only whole words
+-x, --line-regexp        Match only whole lines
+-c, --count              Count the number of matching lines
+-l, --files-with-matches Print only the names of files that contain matches
+-L, --files-without-match Print only the names of files that do not contain matches
+-n, --line-number        Prefix each line of output with the line number within its input file
+-H, --with-filename      Print the filename for each match
+-h, --no-filename        Do not print the filename for each match
+-r, --recursive          Recursively search subdirectories listed
+
+You can combine these options to achieve the desired output. For example, to search for a pattern in a case-insensitive manner and count the number of matching lines, you would use the -i and -c options together:
+grep -i -c "pattern" file.txtYou can combine these options to achieve the desired output. For example, to search for a pattern in a case-insensitive manner and count the number of matching lines, you would use the -i and -c options together:
