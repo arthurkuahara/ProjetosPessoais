@@ -1,0 +1,23 @@
+1. Different communities have different visions of data mining. Can you give the epistemological perspective on data mining, the one from the database community, the machine learning community, the inductive database vision, the way businesses consider data mining?
+2. When mining data, the analyst should always be careful of the many problems encountered in real datasets. Can you give some of them? What statistical assumptions are usually made on the objects in the dataset? Which one sampling bias violates? What is Berkson's paradox? Give an example.
+3. Some algorithms use similarity measures between the objects. Can you give two examples of such algorithms for two different tasks?, an example of a similarity measure that does not relate to a distance and why?
+4. Algorithms using similarity measures between the objects usually require a pre-processing. Which one? Can you give a "statistical" way to do it? In this context, why is it problematic to have too many attributes? What about very correlated attributes?
+
+
+3. Collaborative Filtering (CF) for Recommender Systems, Hierarchical Clustering for Clustering.
+Jaccard Similarity : The Jaccard similarity is a measure used to assess the similarity between sets.
+It is defined as the size of the intersection of two sets divided by the size of their union.
+
+4. Normalization is a statistical pre-processing technique that scales the values of different attributes to a 
+common range or distribution. This step ensures that attributes with different scales or units do not dominate the 
+similarity calculation. A statistical way to normalize the attributes is by applying z-score normalization 
+(also known as standardization). This method transforms each attribute by subtracting its mean and dividing by its 
+standard deviation. The resulting transformed values have a mean of zero and a standard deviation of one, allowing 
+for fairer comparisons across attributes.
+Curse of Dimensionality - When the number of attributes (dimensions) is large relative to the number of data points,
+it can lead to the curse of dimensionality. The sparsity makes it difficult to accurately measure similarity 
+between objects, and it can result in increased computational complexity and reduced clustering or classification 
+performance.
+Redundancy - Highly correlated attributes contain similar or redundant information about the data +
+Including highly correlated attributes can unnecessarily increase the dimensionality of the data without 
+adding much additional information.

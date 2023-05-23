@@ -1,0 +1,6 @@
+What is the fundamental difference that makes a labelling obtained from a classification differ from that of 
+a clustering?
+
+The fundamental difference between classification and clustering is that classification is a supervised learning 
+approach where a specific label is provided to the machine to classify new observations, whereas clustering is an 
+unsupervised learning approach where grouping is done on similarities basis without the help of class labels.

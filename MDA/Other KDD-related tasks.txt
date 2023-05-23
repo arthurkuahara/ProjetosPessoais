@@ -1,0 +1,33 @@
+1. What is the difference between a supervised and an unsupervised task? Can you give examples of such tasks? What does it entail for their quality assessment?
+2. What is dimensionality reduction? Different algorithms reduce the number of dimensions for different purposes. Which purposes?
+3. Can you give two reasons to do a Principle Component Analysis?
+
+1. 
+
+In a supervised task, the learning algorithm is provided with labeled data, where each data point is 
+associated with a known target or output variable.
+
+In an unsupervised task, the learning algorithm does not have access to labeled data or target variables.
+In supervised tasks, the quality assessment typically involves evaluating the accuracy or predictive performance 
+of the model using labeled test data. 
+
+In unsupervised tasks, the quality assessment is often more subjective and challenging since there are no explicit 
+target variables to compare against. Evaluation metrics depend on the specific unsupervised task. For example, in 
+clustering, metrics such as silhouette score or purity can be used to assess the quality of cluster assignments. 
+However, since unsupervised learning aims to discover unknown patterns or structures, the interpretation and 
+evaluation of results often involve human judgment, domain knowledge, or downstream tasks.
+
+2. 
+
+Dimensionality reduction refers to the process of reducing the number of input features or dimensions in a 
+dataset while preserving its essential structure or information. It is commonly used in data preprocessing and 
+analysis to overcome the curse of dimensionality, improve computational efficiency, visualize high-dimensional 
+data, remove redundant or irrelevant features, and enhance model performance.
+
+Some purposes : Feature Selection, Feature Extraction (PCA), Compression (SVD).
+
+3. 
+
+Dimensionality Reduction - PCA allows for a lower-dimensional representation of the data. Overcomes the curse of dimensionality
+Data Visualization - PCA can be used for visualizing high-dimensional data in a lower-dimensional space. 	
+

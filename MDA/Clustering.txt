@@ -1,0 +1,47 @@
+Q : What is a single-linkage, a complete linkage and an average linkage? How do they influence a hierarchical agglomeration?
+A : Between any two points in two clusters :
+In single-linkage, the distance between two clusters is defined as the minimum distance
+(Sensible to outliers)
+In complete-linkage, the distance between two clusters is defined as the maximum distance
+(Avoid when varying cluster sizes - may produce overly tight clusters or merge smaller clusters into larger ones)
+In average-linkage, the distance between two clusters is defined as the average distance
+(produces clusters that are generally more compact and well-separated than single-linkage but less tight than complete-linkage.)
+
+Q : Can you give advantages/drawbacks of a hierarchical clustering vs. k-means clustering?
+A : 
+Hierarchical (Advantages)
+No need to specify the number of clusters beforehand
+Can capture complex cluster structures and is not limited to spherical or convex clusters
+Hierarchical (Disadvantages)
+Computationally expensive, especially for large datasets
+Sensitive to the choice of distance metric and linkage method
+K-Means (Advantages)
+Computationally efficient, making it suitable for large datasets.
+K-Means (Disadvantages)
+Requires specifying the number of clusters (K) beforehand, which may not be known in advance
+The algorithm may converge to a local minimum, leading to different outputs for different runs
+
+
+Q : "When using k-means, the greatest issue is to know k". Can you explain this sentence? Do you know a way to discover k?
+A : That statement highlights the challenge of determining the optimal number of clusters (k) when using 
+the K-means clustering algorithm. Since K-means requires you to specify the number of clusters beforehand, 
+choosing an appropriate value for k is crucial for obtaining meaningful clustering results. 
+An incorrect choice of k may lead to poor clustering performance.
+Cross-validation: This method involves dividing the dataset into training and validation sets. 
+You can train the K-means algorithm on the training set for different values of k and evaluate the clustering 
+performance on the validation set using a clustering evaluation metric, such as adjusted Rand index or mutual 
+information. The optimal k is the one that yields the best performance on the validation set.
+
+
+Q : How do k-means, fuzzy c-means, and EM relate? What are their respective advantages and drawbacks?
+A : K-means, fuzzy c-means (FCM), and expectation-maximization (EM) are all clustering algorithms used 
+to group data points based on their similarity. 
+K-Means : Simple and computationally efficient / Requires specifying the number of clusters (K) in advance.
+Fuzzy C-Means : Can handle datasets with irregular cluster shapes and varying cluster sizes. / Requires tuning the fuzziness parameter, which controls the degree of cluster overlap.
+EM : Can handle datasets with complex cluster shapes and sizes. / Can be slower and more computationally demanding than K-means and FCM.
+
+Q : Given the two-dimensional objects the teacher will plot, what algorithm(s) (with what configuration) would you suggest to discover the two "obvious" clusters? Instead of directly processing these objects, what derived attribute seems to make more sense?
+A : K-Means, with K set to 2 to discover two clusters.
+Instead of directly processing the objects' coordinates, you can consider calculating the pairwise distances 
+between the objects as a derived attribute. By representing the objects based on their distances, you capture the 
+similarity or dissimilarity between them, which can help in clustering.
