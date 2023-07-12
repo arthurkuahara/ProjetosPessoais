@@ -1,0 +1,56 @@
+Revisão completa : Teste de Software
+
+Testes mensuram qualidade do código : quanto mais (bons) testes, maior sua qualidade.
+Testes automatizados servem para pegar bugs, possibilitar mudanças no código e ajudam a melhorar o projeto do sistema.
+
+Test Frameworks : Facilitam a escrita e a execução do conjunto de testes, além de exportar relatórios sobre os resultados.
+Frameworks fornecem métodos como Asserts, Fixtures (setUp, tearDown, etc.)
+
+Três tipos de testes : Unidade, Integração e Sistema (distribuição 80/15/5)
+Integração testa a interação entre duas funções, e.g salvar o caminho, verificar se o caminho existe e depois verificar se o arquivo salvo lá tá certo.
+Sistema normalmente é no front, testado pelo Selenium por exemplo.
+
+Testes de Unidade : verificam pequenos pedaços de código, são rápidos e fáceis de escrever.
+Essencialmente, o código pode ser separado em duas partes : Classes de Aplicação e Conjuntos de Testes.
+Nomenclatura : StackTest (testando a classe Stack)
+O contexto de um teste se chama FIXTURE, e consiste na inicializaçao do ambiente do teste, criação dos objetos necessários, etc.
+
+Podemos usar as funções para evitar repetições na hora de inicializar as features.
+
+@Before / @After
+SetUp() /  TearDown()
+
+TDD : Testar ANTES de implementar a funcionalidade.
+Ciclo do TDD -> Estágio Vermelho, Estágio Verde, Estágio Amarelo
+AAA (Arrange, Act, Assert) vs. SetUp, Exercise, Verify, Teardown.
+
+Premissas :  Busque testes estáveis - Refatorar não deve quebrar os testes
+Teste através de APIs públicas - Melhor consistência
+Teste comportamentos, não métodos - given that, when attempting to, then.
+
+Princípios FIRST : Fast, Independent, Repeatable, Self-Checking, Timely.
+Flaky tests violam a premissa de “Repeatable” - Variáveis mudam entre as execuções.
+Testes Caixa Preta / Caixa Branca / Aceitação (outros tipos de testes)
+Classes de Equivalência : Dividir em “brackets” e.g Imposto de Renda : testar valor limite
+
+Legibilidade de testes : Princípios DRY vs DAMP (repetir ou deixar enxuto, mas sem claridade?)
+Test Smells : Conditional Test Logic, Exception Handling, General Fixture, Mystery Guest, Redundant Print, Unknown Test
+
+Test Coverage : percentual de linhas de código cobertas por algum teste.
+Amarelo : Desvio (se um “caminho” do código não for seguido, ele não é testado” /	 Vermelho : Não coberto
+Google guideline : 85% do código deve ser coberto por testes. 
+Outras métricas de cobertura : cobertura de funções / cobertura de branches (mais rigorosa)
+Boas práticas : cobertura facilita o workflow, mas alta cobertura != alta qualidade. Não existe % ideal de cobertura, mas é essencial.
+
+Testabilidade : Design for Testability : código favorece a implementação dos testes (coesão alta, acoplamento baixo, etc.)
+Melhor extrair função que seja fácil de ser testada, do que deixar o código sem testes.
+
+Mocks - Pros : Isolation, Control, Speed, Reproductibility. Cons : Not always represents real behavior, Larger overhead, do not capture integration risks, false sense of security.
+
+TEST DOUBLES :
+
+- Stub : Objeto fornece respostas prontas para chamadas realizadas nos testes. Stub setup, asserts, etc.
+- Spies : Analisa as chamadas das funções. Múltiplos asserts
+- Mocks Tipo de spy, utiliza o método verify. Pode não ter verify se a classe chamar sozinha (JMock). Examina a chamada dentro do verify (e pode ter o mock.expects).
+- Dummy : Objeto passado e não utilizado pelo código (invoice inv = new Invoice (new Dummy Customer)
+- Fake : Objeto funcional, mas não adequado para produção. (fake database, in-memory database, fake webservice, etc.)
