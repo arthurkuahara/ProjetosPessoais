@@ -1,0 +1,101 @@
+Resumo : Teste de Software
+
+Testes servem para mensurar a qualidade do código. Quanto mais (bons) testes, normalmente melhor a qualidade do código que está sendo testado.
+Frameworks de teste servem para rodar os testes automaticamente, por exemplo. Em geral, os testes contribuem também para permitir mudanças no código, para melhorar em geral a qualidade do projeto do sistema e pegar bugs que possam aparecer nas execuções do código.
+Por exemplo, se estivermos escrevendo uma função que conta palavras em caps em uma string, testaremos strings com espaços, sem, com múltiplas palavras, com uma só, etc.
+
+Frameworks fornecem métodos como asserts, fixtures (setUp, tearDown, etc.)
+A classe unittest em Python possui sintaxe incluindo testStringParser(unittest.TestCase) e self.assertEqual().
+Frameworks permitem que rodemos múltiplos testes ao mesmo tempo, além de gerar relatórios de cobertura e sobre o resultado da execução desses testes.
+
+Existem três principais tipos de testes, testes de Unidade, Integração e Sistema (na proporção 80/15/5).
+Testes de Unidade servem para automaticamente verificar pequenos pedacinhos de código. Eles devem ser fáceis de serem escritos, curtos e rápidos.
+Código pode ser dividido em duas partes, classes de aplicação e conjuntos de teste.
+
+Classes de teste possuem o mesmo nome das classes testadas, com a adição do sufixo Test. Por exemplo, Stack -> StackTest.
+
+O “contexto” de um teste chama-se Fixture. Ele engloba tudo que o teste precisa para rodar, isto é, suas dependências, suas declarações, etc.
+Para evitar repetições no contexto dos testes, podemos usar funções disponíveis em frameworks, como o @Before / SetUp e o @After / tearDown.
+
+AAA (arrange, act, assert) e Given, When, Then vs. SetUp, Exercise, Verify e TearDown.
+
+Existem três principais premissas de boas práticas sobre testes de unidade
+
+- Busque testes estáveis (refatorar não deve mudar o comportamento do teste)
+- Teste através de APIs públicas (mais estáveis e menos mutáveis - gera testes frágeis se realizado em métodos privados - podemos alterar a visibilidade dos métodos ou testar a lógica diretamente).
+- Teste comportamentos, não métodos (existe um acoplamento entre o teste e o método, quando um cresce o outro cresce também. Desse modo, temos que testar os comportamentos - uma feature é uma coleção de comportamentos - o resultado é um conjunto de testes claros, pequenos, simples e focados).
+
+Testes de unidade devem seguir os princípios FIRST. Isso quer dizer que eles devem ser
+Fast, Independent, Repeatable, Self-Checking (resultado binário, verde/vermelho), e Timely.
+Testes flaky violam o princípio do ‘Repeatable’, pois seus resultados vão variar dependendo da execução.
+
+Testes de integração verificam a interação entre componentes do sistema, e podem envolver comunicação com serviços externos, como bancos de dados, APIs externas e filesystems. Por isso, são mais lentos, mais caros e menos frequentes que testes de unidade.
+Por exemplo, podemos testar que um arquivo x está sendo salvo em um caminho y. Isso testa tanto o método de salvar quanto o método de criar o caminho.
+
+Testes de Sistema (ou também chamados de testes E2E) são testes que simulam o uso do sistema por usuários, normalmente realizados no UI do programa. São muito mais caros e menos frequentes, além de mais frágeis, pois podem ser impactados por alterações na UI. Podem ser utilizados frameworks, como o Selenium, que automatizam esses testes. Existem métodos nesse framework para acessar elementos da página, fazer requisições, etc.
+
+Basicamente, os testes podem ser divididos em dois grandes grupos : Testes Caixa-Preta e testes Caixa-Branca.
+
+- Caixa-Preta : também chamados de testes funcionais, são escritos com base apenas na interface do sistema que está sendo testado. Sem conhecimento de código (e.g testar se o login funciona com credenciais erradas)
+- Caixa-Branca : são testes não-funcionais, como testes de unidade. Consideram informações sobre o código e sobre a estrutura do sistema que está sendo testado.
+
+Também existem grupos adicionais, como testes de aceitação (realizados pelos clientes), testes de desempenho, de usabilidade, falhas, etc.
+
+Testes de Regressão ocorrem quando o sistema é modificado, com a inclusão de um novo módulo, por exemplo. Desse modo, é garantido que as alterações não introduzem comportamentos inesperados ou novos erros em um código que já funcionava antes. Com testes caixa preta, temos algumas técnicas que ajudam na seleção das entradas que serão verificadas : classes de equivalência (“brackets” como faixas do imposto de renda) e análise do valor limite.
+
+Testes devem expressar o comportamento testado de forma clara, ou seja, eles devem ser legíveis. Idealmente, o desenvolvedor não pode perder tempo para entender o que um teste está fazendo. Nome dos testes devem descrever funcionalidades.
+
+Basicamente, existem duas principais “escolas” de nomenclatura - os princípios DRY e DAMP. DRY enfatiza a não-repetição, enquanto DAMP enfatiza a legibilidade.
+
+Test Smells, assim como Code Smells, são sinais de algo não está ‘cheirando bem’ no teste. Eles representam estruturas e características preocupantes nos testes de unidade. Eles são alertas para os implementadores dos testes de algo pode estar errado. 
+
+Os principais exemplos de Test Smells são : Conditional Test Logic, Exception Handling, General Fixture, Mystery Guest, Redundant Print, Unknown Test
+
+- Conditional Test Logic (teste não cobre todas as possibilidades do código)
+- Exception Handling (quando o sucesso/falha do teste depende do lançamento de uma exceção)
+- General Fixture (quando a fixture é muito genérica, e os métodos só usam parte dela)
+- Mystery Guest (quando o teste utiliza recursos externos, pode ficar flaky)
+- Redundant Print (idealmente, não devem existir prints, pois os testes devem ser rodados automaticamente)
+- Unknown Test (teste não contém asserts)
+
+Cobertura de testes é o número de de linhas executadas pelos testes / total de linhas do programa. Basicamente, ela é uma métrica da % de linhas de código que estão sendo cobertas pelos testes.
+
+Não existe número mágico para a cobertura, depende de diversos fatores incluindo a linguagem de programação que é utilizada. Número recomendado é em torno de 85%.
+
+Testabilidade é uma medida de quão fácil é implementar testes para um sistema. Ou seja, é importante que o projeto do código de produção favoreça a implementação de testes. Portanto, o resultado final de design for testability é um código que possui boas práticas de projeto - coesão alta, acoplamento baixo, etc. 
+
+Coesão : função que é muito específica - interage bem com outras funções específicas. 
+Acoplamento : quanto uma classe depende da outra.
+
+Idealmente, esses princípios devem ser respeitados por qualquer código bom - cada parte do código deve fazer uma coisa específica.
+
+Por exemplo, se uma só classe pega os dados do banco e calcula o IMC, é bom que exista uma função que pega os dados e outra que calcula o IMC para favorecer a testabilidade.
+
+Funções assíncronas são frequentemente flaky, pois seu resultado é computado por uma thread independente.
+
+TDD - Test-Driven Development é uma prática proposta por XP (Extreme Programming). Basicamente, a ideia é que os testes de uma função devem ser escritos antes mesmo do código, para já desenvolver pensando na testabilidade.
+
+O ciclo do TDD consiste em três fases - vermelho, verde e amarelo. Primeiro, escrevemos os testes, que vão falhar porque não implementamos nada. Depois, escrevemos o mínimo necessário, só para o teste rodar. Por fim, no estágio amarelo, refatoramos o código para elevar sua qualidade.
+
+Test Doubles : às vezes, é difícil testar o SUT, pois ele possui dependências complicadas de serem testadas (e.g bancos de dados, filesystems, serviços externos, etc.) Mocks são objetos que emulam o objeto real, mas apenas para permitir o teste. Isso faz com que os testes sejam rápidos, isolados e determinísticos.
+
+Vantagens : reduzir a quantidade de código, melhorar a cobertura dos testes, melhorar a isolação dos testes, etc.
+Desvantagens : overhead maior, testes frágeis, falsa-confiança, etc.
+
+Existem 4 (5) tipos principais de Test Doubles :
+
+- Dummy (cria um objeto apenas para ser passado, não vai ser chamado)
+- Stub (cria um objeto com respostas “prontas” para serem chamadas)
+- Spy (cria um objeto que guarda histórico de quantas vezes cada função foi chamada)
+- Mocks (usam o verify, criam o objeto que acompanha as chamadas das funções, pré-programados com expectativas)
+- Fakes, que são objetos funcionais mas que não são adequados para produção.
+Stub x Mock
+
+Basicamente, a diferença é que o Stub não possui verify, e ele dá “Setup” na resposta preparada. Já o mock examina a chamada, verificando se os argumentos passados são certos, etc.)
+
+Mock x Spy
+
+Basicamente, o spy possui um monte de assertEquals, enquanto o mock utiliza o verify. A diferença principal é que o Mock modifica a chamada, passando seus argumentos, enquanto o spy delega tudo para o método em si e está apenas interessado em saber parte de tudo.
+Podemos considerar que o mock é mais “completo”, e o spy é útil para o partial-mocking
+
+Testes de mutação são injeções artificiais de bugs para verificar se os testes capturam esses bugs. Se o teste não detecta bugs artificiais, ele não detectará os bugs reais. É custoso ficar injetando os bugs, então gera um overhead maior.
